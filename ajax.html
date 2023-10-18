@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ETS Pemrogramman Web 2023</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  </head>
+  <body class="container">
+    <div class="row" id="api-data-cards"></div>
+
+    <!-- Kerjakan dibawah sini -->
+    <script>
+        function fetchData() {
+            fetch('https://it-its.id/api/books')
+                .then(response => response.json())
+                .then(data => {
+                    const apiDataCardsElement = document.getElementById('api-data-cards');
+
+                    const cards = data.map(item => {
+                        return `
+                            <div class="col-md-4 mb-4 bg-white">
+                                <div class="card shadow-sm rounded">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${item.title} (${item.year})</h5>
+                                        <h6 class="card-subtitle mb-1">${item.author}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    apiDataCardsElement.innerHTML = cards.join('');
+                    
+                    console.log(data);
+                })
+                
+        }
+
+        window.onload = fetchData;
+    </script>
+
+    <!-- Kerjakan diatas ini -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+</html>
